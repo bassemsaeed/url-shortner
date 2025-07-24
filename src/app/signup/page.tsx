@@ -1,7 +1,12 @@
 
+"use client";
+
 import Link from 'next/link';
+import { useState } from 'react';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 const SignUp = () => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
       <div className="max-w-md w-full mx-auto px-4">
@@ -40,15 +45,28 @@ const SignUp = () => {
               >
                 Password
               </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder="••••••••"
-              />
+              <div className="relative mt-1">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  required
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all pr-12"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 hover:text-blue-500"
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon className="h-6 w-6" />
+                  ) : (
+                    <EyeIcon className="h-6 w-6" />
+                  )}
+                </button>
+              </div>
             </div>
             <button
               type="submit"
